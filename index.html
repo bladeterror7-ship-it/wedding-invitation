@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Нямжаргал & Түвшинзаяа</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <!-- Арын ая -->
+    <audio id="bgMusic" loop src="hurimiin duu H264.mp3"></audio>
+
+    <!-- 1-Р ХУУДАС: УРИЛГЫН НҮҮР -->
+    <div class="card" id="card">
+      <img src="image.png" class="card-bg" id="cardBg" alt="Wedding Photo" />
+      <canvas id="sparkleCanvas"></canvas>
+      <div class="overlay" id="overlay"></div>
+
+      <div class="content">
+        <p class="top-tag">У Р И Л Г А</p>
+
+        <div class="title-section hidden" id="titleSection">
+          <h1 class="names">НЯМЖАРГАЛ <span class="and">&</span> ТҮВШИНЗАЯА</h1>
+          <p class="sub-tag">Х У Р И М</p>
+        </div>
+
+        <p class="instruction" id="instruction">
+          ГЭРЛИЙГ АСААХЫН ТУЛД ДАРНА УУ
+        </p>
+
+        <button class="open-btn hidden" id="openBtn">Урилга нээх</button>
+      </div>
+    </div>
+
+    <!-- 2-Р ХУУДАС: ТООЛОГЧТОЙ ХЭСЭГ -->
+    <div class="second-page" id="secondPage">
+      <img src="scroll.jpg" class="page-bg" alt="Wedding Photo 2" />
+      <div class="page-overlay"></div>
+
+      <div class="page-content">
+        <div>
+          <p class="top-tag">У Р И Л Г А</p>
+          <h1 class="names">НЯМЖАРГАЛ <span class="and">&</span> ТҮВШИНЗАЯА</h1>
+          <p class="sub-tag">Х У Р И М</p>
+          <p class="quote">Бидний мөч хүртэл</p>
+        </div>
+
+        <div class="bottom-section">
+          <div class="countdown">
+            <div class="time-box">
+              <span id="days">00</span>
+              <label>ӨДӨР</label>
+            </div>
+            <div class="colon">•</div>
+            <div class="time-box">
+              <span id="hours">00</span>
+              <label>ЦАГ</label>
+            </div>
+            <div class="colon">•</div>
+            <div class="time-box">
+              <span id="minutes">00</span>
+              <label>МИНУТ</label>
+            </div>
+            <div class="colon">•</div>
+            <div class="time-box">
+              <span id="seconds">00</span>
+              <label>СЕКУНД</label>
+            </div>
+          </div>
+
+          <div class="scroll-indicator">
+            <div class="mouse-icon">
+              <div class="wheel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-Р ХУУДАС: УРИЛГЫН БИЧВЭР БОЛОН ОГНОО, ХАЯГ -->
+    <div class="third-page" id="thirdPage">
+      <div class="invitation-text-section">
+        <div class="flower-icon">❀</div>
+
+        <h2 class="section-names">
+          НЯМЖАРГАЛ <span class="and">&</span> ТҮВШИНЗАЯА
+        </h2>
+
+        <p class="greeting">
+          Эрхэм хүндэт төрөл төрөгсөд, хамаатан садан, анд нөхөд өө!
+        </p>
+
+        <p class="poem">
+          Хаан бугуйвчаар жаргал нэгтгэж<br />
+          Хатан сүйхээр заяа зангидаж буй бидний<br />
+          хуримын ёслолд хүрэлцэн ирэхийг<br />
+          урьж байна.
+        </p>
+
+        <div class="info-card">
+          <p class="info-label">ОГНОО</p>
+          <p class="info-value">2026 ОНЫ 8-Р САРЫН 06</p>
+
+          <p class="info-label">ЦАГ</p>
+          <p class="info-value">18:00</p>
+
+          <p class="info-label">ХАЯГ</p>
+          <p class="info-value">
+            Home plaza One Event Hall, 2nd Floor, Home Plaza, 15th Khoroo,
+            Khan-Uul District
+          </p>
+        </div>
+
+        <a
+          href="https://www.google.com/maps/place/One+event+hall/@47.9046085,106.9277221,687m/data=!3m2!1e3!4b1!4m6!3m5!1s0x5d969232dff4ad3d:0xb14ef8fb4c3a1db8!8m2!3d47.9046085!4d106.9277221!16s%2Fg%2F11c1xcw0_p!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDcyNi4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="map-btn"
+        >
+          📍 ГАЗРЫН ЗУРАГ
+        </a>
+
+        <div class="footer-parents">
+          <p class="respect-text">ХҮНДЭТГЭН УРЬСАН</p>
+          <p class="parents-label">эцэг эх нь:</p>
+          <p class="parents-names">Нямжаргал • Түвшинзаяа</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-Р ХУУДАС: ЗУРГИЙН ЦОМОГ (БИД) -->
+    <!-- 4-Р ХУУДАС: ЗУРГИЙН ЦОМОГ (БИД - 9 ЗУРАГ) -->
+    <div class="fourth-page" id="fourthPage">
+      <h2 class="gallery-title">Б И Д</h2>
+      <p class="gallery-subtitle">Уул, тал нутаг — бидний нутаг</p>
+
+      <div class="gallery-grid">
+        <!-- 1 дэх зураг (Том) -->
+        <div class="photo-card large">
+          <img src="1.jpg" alt="Couple Photo 1" />
+        </div>
+
+        <!-- 2, 3 дахь зураг (Хоёр зэрэгцээ) -->
+        <div class="photo-row">
+          <div class="photo-card small">
+            <img src="2.jpg" alt="Couple Photo 2" />
+          </div>
+          <div class="photo-card small">
+            <img src="3.jpg" alt="Couple Photo 3" />
+          </div>
+        </div>
+
+        <!-- 4 дэх зураг (Том) -->
+        <div class="photo-card large">
+          <img src="4.jpg" alt="Couple Photo 4" />
+        </div>
+
+        <!-- 5, 6 дахь зураг (Хоёр зэрэгцээ) -->
+        <div class="photo-row">
+          <div class="photo-card small">
+            <img src="5.jpg" alt="Couple Photo 5" />
+          </div>
+          <div class="photo-card small">
+            <img src="6.jpg" alt="Couple Photo 6" />
+          </div>
+        </div>
+
+        <!-- 7 дахь зураг (Том) -->
+        <div class="photo-card large">
+          <img src="7.jpg" alt="Couple Photo 7" />
+        </div>
+
+        <!-- 8, 9 дэх зураг (Хоёр зэрэгцээ) -->
+        <div class="photo-row">
+          <div class="photo-card small">
+            <img src="8.jpg" alt="Couple Photo 8" />
+          </div>
+          <div class="photo-card small">
+            <img src="9.jpg" alt="Couple Photo 9" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5-Р ХУУДАС: БАТАЛГААЖУУЛАХ (RSVP) -->
+    <div class="fifth-page" id="fifthPage">
+      <div class="rsvp-container">
+        <div class="rsvp-icon">⚜️</div>
+
+        <h2 class="rsvp-title">Б А Т А Л Г А А Ж У У Л А Х</h2>
+        <p class="rsvp-subtitle">ХУРИМД ОРОЛЦОХОО БАТАЛГААЖУУЛНА УУ.</p>
+
+        <form id="rsvpForm">
+          <div class="form-group">
+            <label class="input-label">ТАНЫ НЭР</label>
+            <input
+              type="text"
+              name="guest_name"
+              class="form-input"
+              placeholder="Нэрээ бичнэ үү..."
+              required
+            />
+            <span class="sub-hint"
+              >(Хамтрагчтайгаа ирэх бол хоёулангийнх нь нэрийг бичнэ үү)</span
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="input-label">ТАНЫ ХАРИУ</label>
+            <div class="radio-options">
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="attendance"
+                  value="Оролцоно"
+                  checked
+                />
+                <span>Оролцоно</span>
+              </label>
+
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="attendance"
+                  value="Хамтрагчтайгаа очно"
+                />
+                <span>Хамтрагчтайгаа очно</span>
+              </label>
+
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="attendance"
+                  value="Харамсалтай нь очиж чадахгүй"
+                />
+                <span>Харамсалтай нь очиж чадахгүй</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="submit-btn">
+            ИЛГЭЭХ
+          </button>
+        </form>
+
+        <div
+          id="statusMessage"
+          class="status-message"
+          style="display: none"
+        ></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

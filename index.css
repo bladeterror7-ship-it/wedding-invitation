@@ -1,0 +1,651 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 1. Скроллын үндсэн тохиргоо (Эхэндээ скроллыг түгжинэ) */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  font-family: "Times New Roman", Times, serif;
+  color: #fff;
+  overflow: hidden; /* Эхлээд скролл түгжигдэнэ */
+  scroll-behavior: smooth; /* Зөөлөн гулсаж скролл хийнэ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Урилга нээх товчлуур дарсны дараа JS-ээр скролл нээх класс */
+html.scroll-enabled,
+body.scroll-enabled {
+  overflow-y: auto;
+}
+
+/* 2. Хуудсуудын ерөнхий хэмжээ */
+.card,
+.second-page {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  overflow: hidden;
+  flex-shrink: 0; /* Хуудсууд бие бие рүүгээ шахагдахаас сэргийлнэ */
+}
+
+/* --- 1-Р ХУУДАСНЫ ТОХИРГОО --- */
+.card {
+  cursor: pointer;
+}
+
+.card-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35);
+  transition: filter 1s ease;
+}
+
+#sparkleCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.overlay,
+.page-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 20px 40px 20px;
+  text-align: center;
+  z-index: 10;
+}
+
+.top-tag {
+  font-size: 11px;
+  letter-spacing: 5px;
+  opacity: 0.8;
+}
+
+.names {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.and {
+  color: #d4af37;
+  font-style: italic;
+}
+
+.sub-tag {
+  font-size: 11px;
+  letter-spacing: 6px;
+  opacity: 0.7;
+}
+
+.instruction {
+  font-size: 11px;
+  letter-spacing: 3px;
+  opacity: 0.8;
+  animation: pulse 2s infinite;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.open-btn {
+  background: #c49a5a;
+  color: #fff;
+  border: none;
+  padding: 14px 45px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Гэрэл ассаны дараах тохиргоо */
+.card.is-lit .card-bg {
+  filter: brightness(0.85);
+}
+
+.card.is-lit .hidden {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.card.is-lit .instruction {
+  display: none;
+}
+
+/* --- 2-Р ХУУДАСНЫ ТОХИРГОО (Зассан хэсэг) --- */
+.second-page .page-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+}
+
+/* Текстийг доош нь шахсан тохиргоо */
+.second-page .page-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Дээд талын хосын нүүрийг таглахгүйн тулд доош нь шахна */
+  align-items: center;
+  padding: 20px 20px 35px 20px;
+  text-align: center;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 12px;
+  margin: 10px 0 15px 0;
+  opacity: 0.9;
+}
+
+.bottom-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Тоологч цаг */
+.countdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.time-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 42px;
+}
+
+.time-box span {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.time-box label {
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  margin-top: 5px;
+}
+
+.colon {
+  font-size: 10px;
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
+
+/* Скролл сануулагч икон */
+.scroll-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 34px;
+  border: 2px solid rgba(212, 175, 55, 0.8);
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.wheel {
+  width: 3px;
+  height: 7px;
+  background-color: #d4af37;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  animation: scrollWheel 1.8s infinite ease-in-out;
+}
+
+/* --- 3-Р ХУУДАСНЫ ТОХИРГОО (Цайвар шар) --- */
+.third-page {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background-color: #f7f3eb;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.flower-icon {
+  color: #c49a5a;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.section-names {
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #222;
+  margin-bottom: 25px;
+}
+
+.greeting {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.poem {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #e0d7c6;
+  border-radius: 8px;
+  padding: 25px 20px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 25px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.info-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #999;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.info-label:first-child {
+  margin-top: 0;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+  letter-spacing: 1px;
+}
+
+.map-btn {
+  display: inline-block;
+  background-color: #722f37;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 35px;
+  transition: background 0.3s ease;
+}
+
+.map-btn:hover {
+  background-color: #58232a;
+}
+
+.footer-parents {
+  margin-top: 10px;
+}
+
+.respect-text {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #888;
+}
+
+.parents-label {
+  font-size: 11px;
+  color: #aaa;
+  margin: 5px 0;
+}
+
+.parents-names {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #333;
+}
+
+/* --- АНИМАЦИУД --- */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes scrollWheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+/* --- 4-Р ХУУДАСНЫ ТОХИРГОО (ЗУРГИЙН ЦОМОГ) --- */
+.fourth-page {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background-color: #f7f3eb; /* Цайвар шаргал арын фон */
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.gallery-title {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 6px;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.gallery-subtitle {
+  font-style: italic;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* Зургуудын тохиргоо */
+.gallery-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.photo-card {
+  overflow: hidden;
+  border-radius: 12px; /* Өнцгийг мохоож зөөлрүүлэх */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* Том зураг (Дээд талын) */
+.photo-card.large {
+  width: 100%;
+  height: 380px;
+}
+
+/* Хоёр жижиг зургийг зэрэгцүүлэх */
+.photo-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.photo-card.small {
+  flex: 1;
+  height: 200px;
+}
+/* --- 5-Р ХУУДАСНЫ ТОХИРГОО (RSVP) --- */
+.fifth-page {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background-color: #f7f3eb;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.rsvp-container {
+  width: 100%;
+  text-align: center;
+}
+
+.rsvp-icon {
+  font-size: 24px;
+  color: #c49a5a;
+  margin-bottom: 10px;
+}
+
+.rsvp-title {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 5px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.rsvp-subtitle {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.input-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 15px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #e0d7c6;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #c49a5a;
+  background-color: #fff;
+}
+
+.sub-hint {
+  display: block;
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* Radio товчлууруудын сонголт */
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-card {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #e0d7c6;
+  padding: 14px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #444;
+  transition: all 0.2s ease;
+}
+
+.radio-card:hover {
+  background-color: #fff;
+}
+
+.radio-card input[type="radio"] {
+  margin-right: 12px;
+  accent-color: #722f37; /* Сонгогдсон үеийн бордо өнгө */
+  width: 16px;
+  height: 16px;
+}
+
+/* Илгээх товч */
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #722f37;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #552127;
+}
+
+.status-message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: #e2f0d9;
+  color: #385723;
+  border: 1px solid #c3e6cb;
+}
+/* 4-р хуудасны галерей */
+.fourth-page {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background-color: #f7f3eb;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.gallery-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.photo-card {
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Том зураг (Дээд, Дунд, Доод) */
+.photo-card.large {
+  width: 100%;
+  height: 320px;
+}
+
+/* Жижиг зургууд (Зэрэгцээ 2 зураг) */
+.photo-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.photo-card.small {
+  flex: 1;
+  height: 180px;
+}
