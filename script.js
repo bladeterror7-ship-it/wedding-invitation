@@ -128,7 +128,7 @@ if (rsvpForm) {
 
     // ✨ Google Sheets руу илгээх URL (Доорх тайлбарыг үзнэ үү)
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbzisiYQivzAp9DH6vnqS0Noa9mhtt6iXbOOdLLqZx78xh19cWp5juAko-OGxQXcfRX43A/exec";
+      "https://script.google.com/macros/s/AKfycbwKX02XUuCQ0QOLRx3rJst0mKXffXfsKUAz90Dx4CFUsip3BCc88UupPzoKhkix6Dc8Sw/exec";
 
     fetch(scriptURL, { method: "POST", body: formData })
       .then((response) => {
