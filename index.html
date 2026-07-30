@@ -130,18 +130,14 @@
     </div>
 
     <!-- 4-Р ХУУДАС: ЗУРГИЙН ЦОМОГ (БИД) -->
-    <!-- 4-Р ХУУДАС: ЗУРГИЙН ЦОМОГ (БИД - 9 ЗУРАГ) -->
     <div class="fourth-page" id="fourthPage">
       <h2 class="gallery-title">I LOVE YOU</h2>
       <p class="gallery-subtitle"></p>
 
       <div class="gallery-grid">
-        <!-- 1 дэх зураг (Том) -->
         <div class="photo-card large">
           <img src="1.jpg" alt="Couple Photo 1" />
         </div>
-
-        <!-- 2, 3 дахь зураг (Хоёр зэрэгцээ) -->
         <div class="photo-row">
           <div class="photo-card small">
             <img src="2.jpg" alt="Couple Photo 2" />
@@ -150,13 +146,9 @@
             <img src="3.jpg" alt="Couple Photo 3" />
           </div>
         </div>
-
-        <!-- 4 дэх зураг (Том) -->
         <div class="photo-card large">
           <img src="4.jpg" alt="Couple Photo 4" />
         </div>
-
-        <!-- 5, 6 дахь зураг (Хоёр зэрэгцээ) -->
         <div class="photo-row">
           <div class="photo-card small">
             <img src="5.jpg" alt="Couple Photo 5" />
@@ -165,13 +157,9 @@
             <img src="6.jpg" alt="Couple Photo 6" />
           </div>
         </div>
-
-        <!-- 7 дахь зураг (Том) -->
         <div class="photo-card large">
           <img src="7.jpg" alt="Couple Photo 7" />
         </div>
-
-        <!-- 8, 9 дэх зураг (Хоёр зэрэгцээ) -->
         <div class="photo-row">
           <div class="photo-card small">
             <img src="8.jpg" alt="Couple Photo 8" />
@@ -201,8 +189,21 @@
               placeholder="Нэрээ бичнэ үү..."
               required
             />
+          </div>
+
+          <div class="form-group">
+            <label class="input-label">ИРЭХ ХҮНИЙ ТОО</label>
+            <input
+              type="number"
+              name="guest_count"
+              class="form-input"
+              value="1"
+              min="1"
+              max="10"
+              required
+            />
             <span class="sub-hint"
-              >(Хамтрагчтайгаа ирэх бол хоёулангийнх нь нэрийг бичнэ үү)</span
+              >(Гэр бүл, хүүхэдтэйгээ ирэх бол нийт хүний тоогоо бичнэ үү)</span
             >
           </div>
 
@@ -213,19 +214,19 @@
                 <input
                   type="radio"
                   name="attendance"
-                  value="Оролцоно"
+                  value="Эхнэр/Нөхөр, хүүхдийн хамт оролцоно"
                   checked
                 />
-                <span>Оролцоно</span>
+                <span>Эхнэр/Нөхөр, хүүхдийн хамт оролцоно</span>
               </label>
 
               <label class="radio-card">
                 <input
                   type="radio"
                   name="attendance"
-                  value="Хамтрагчтайгаа очно"
+                  value="Ганцаараа оролцоно"
                 />
-                <span>Хамтрагчтайгаа очно</span>
+                <span>Ганцаараа оролцоно</span>
               </label>
 
               <label class="radio-card">
